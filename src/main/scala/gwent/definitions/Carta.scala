@@ -5,7 +5,7 @@ package cl.uchile.dcc
 package gwent.definitions
 import scala.collection.mutable
 
-trait CardTrait{
+trait CartaTrait{
   protected var Nombre: String
   protected val Tipo: String
   def ver_nombre(): String
@@ -18,7 +18,7 @@ trait CardTrait{
  *  @param nombre es el nombre que se muestra de la carta.
  *  @param tipo es el tipo de la carta. puede ser Unidad o Clima.
  */
-abstract class Carta(protected val nombre: String, val tipo: String) extends CardTrait{
+abstract class Carta(protected val nombre: String, val tipo: String) extends CartaTrait{
   protected var Nombre: String = nombre
   protected val Tipo: String = tipo
   if (this.Nombre == ""){
@@ -75,7 +75,7 @@ class Unidad(nombre: String,
 }
 
 /** Clima, carta jugable al centro
- * 
+ *
  *  @constructor crea una carta de clima con nombre
  *  @param nombre es el nombre de la carta.
  *                es el unico valor pues el efecto que cause dependera de la carta o el campo afectado
