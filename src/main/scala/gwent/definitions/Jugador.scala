@@ -3,7 +3,7 @@
 
 package cl.uchile.dcc
 package gwent.definitions
-import cl.uchile.dcc.gwent.definitions.carta.Carta
+import cl.uchile.dcc.gwent.definitions.card.Card
 
 import scala.collection.mutable
 
@@ -11,15 +11,15 @@ trait JugadorTrait:
   protected val Nombre: String
   protected val Seccion: Int
   protected var Gemas: Int
-  protected var Mazo: Array[Carta]
-  protected var Mano: Array[Carta]
+  protected var Mazo: Array[Card]
+  protected var Mano: Array[Card]
 
-class Jugador(val nombre: String, var mazo: Array[Carta], var mano: Array[Carta]){
+class Jugador(val nombre: String, var mazo: Array[Card], var mano: Array[Card]){
   private var Nombre: String = nombre
   private val Seccion: Int = 0
   private var Gemas: Int = 2
-  private var Mazo: Array[Carta] = mazo
-  private var Mano: Array[Carta] = mano
+  private var Mazo: Array[Card] = mazo
+  private var Mano: Array[Card] = mano
   if (this.Nombre.isEmpty) {
     this.Nombre = "Jugador"
   }
@@ -39,10 +39,10 @@ class Jugador(val nombre: String, var mazo: Array[Carta], var mano: Array[Carta]
   def ver_nombre(): String = {
     this.Nombre
   }
-  def ver_mazo(): Array[Carta] = {
+  def ver_mazo(): Array[Card] = {
     this.Mazo
   }
-  def ver_mano(): Array[Carta] = {
+  def ver_mano(): Array[Card] = {
     this.Mano
   }
   def cuanta_vida(): Int ={

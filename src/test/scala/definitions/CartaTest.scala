@@ -1,9 +1,9 @@
-/*Reminder: Hay dos clases de carta; unidad y clima. Cada carta tiene una posicion en el mapa donde puede
+/*Reminder: Hay dos clases de card; unidad y clima. Cada card tiene una posicion en el mapa donde puede
 * ser colocada. Las cartas de unidad se pueden colocar en las zonas de CaC, Distancia o Asedio dependiendo
 * del tipo que sea*/
 package cl.uchile.dcc
 package gwent.definitions
-import cl.uchile.dcc.gwent.definitions.carta.{Clima, Unidad}
+import cl.uchile.dcc.gwent.definitions.card.{Clima, Unidad}
 
 import scala.collection.mutable
 import munit.FunSuite
@@ -33,13 +33,13 @@ class CartaTest extends FunSuite{
     assert(!Carta_1.equals(Carta_4))
   }
 
-  test("La carta tiene nombre") {
+  test("La card tiene nombre") {
     assert(Carta_1.ver_nombre() == "Guerrero")
     assert(Carta_2.ver_nombre() != null)
     assert(Carta_3.ver_nombre().nonEmpty)
   }
 
-  test("La carta tiene una clase, y esta puede ser 'Unidad' o 'Clima' ") {
+  test("La card tiene una clase, y esta puede ser 'Unidad' o 'Clima' ") {
     assert(Carta_1.ver_tipo() == "Unidad")
     assert(Carta_2.ver_tipo() == "Clima")
     assert(Carta_3.ver_tipo() == "Clima")
@@ -56,7 +56,7 @@ class CartaTest extends FunSuite{
     assert(Clases.contains(Carta_4.ver_clase()))
   }
 
-  test("La carta puede tener una habilidad especial, y puede no tenerla") {
+  test("La card puede tener una habilidad especial, y puede no tenerla") {
 
   }
 

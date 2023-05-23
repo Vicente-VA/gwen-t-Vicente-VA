@@ -4,7 +4,7 @@
 package cl.uchile.dcc
 package gwent.definitions
 
-import cl.uchile.dcc.gwent.definitions.carta.{Carta, Clima, Unidad}
+import cl.uchile.dcc.gwent.definitions.card.{Card, Clima, Unidad}
 
 import scala.collection.mutable
 import munit.FunSuite
@@ -13,15 +13,15 @@ import scala.collection.mutable.{ArrayBuffer, ArrayStack}
 import scala.runtime.stdLibPatches.Predef.assert
 
 class JugadorTest extends FunSuite{
-  var arr_void: Array[Carta] = Array()
-  var mazo_inicial: Array[Carta] = Array(new Unidad("Felipe","Distancia",1, None), new Clima("Soleado"))
-  var mano_inicial: Array[Carta] = Array()
+  var arr_void: Array[Card] = Array()
+  var mazo_inicial: Array[Card] = Array(new Unidad("Felipe","Distancia",1, None), new Clima("Soleado"))
+  var mano_inicial: Array[Card] = Array()
   var Jugador_1: Jugador = new Jugador("", arr_void,arr_void)
   var Jugador_2: Jugador = new Jugador("", arr_void,arr_void)
 
   override def beforeEach(context: BeforeEach): Unit ={
     Jugador_1 = new Jugador("P1", mazo_inicial, mano_inicial)
-    Jugador_2 = new Jugador("", new Array[Carta](0), new Array[Carta](0))
+    Jugador_2 = new Jugador("", new Array[Card](0), new Array[Card](0))
   }
   test("equals"){
     assertEquals(Jugador_1, Jugador_1)
@@ -48,7 +48,7 @@ class JugadorTest extends FunSuite{
 
   test("El jugador comienza con 2 gemas"){
     assert(Jugador_1.cuanta_vida() == 2)
-    val nuevoJugador = new Jugador("", new Array[Carta](0), new Array[Carta](0))
+    val nuevoJugador = new Jugador("", new Array[Card](0), new Array[Card](0))
     assert(nuevoJugador.cuanta_vida() == 2)
   }
 
