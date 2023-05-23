@@ -2,7 +2,10 @@
 * ser colocada. Las cartas de unidad se pueden colocar en las zonas de CaC, Distancia o Asedio dependiendo
 * del tipo que sea*/
 package cl.uchile.dcc
-package gwent.definitions
+package gwent.definitions.carta
+
+import gwent.definitions.{Carta, CartaTrait}
+
 import scala.collection.mutable
 
 trait CartaTrait{

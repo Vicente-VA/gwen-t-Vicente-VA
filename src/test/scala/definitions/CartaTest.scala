@@ -3,9 +3,11 @@
 * del tipo que sea*/
 package cl.uchile.dcc
 package gwent.definitions
-import scala.collection.mutable
+import cl.uchile.dcc.gwent.definitions.carta.{Clima, Unidad}
 
+import scala.collection.mutable
 import munit.FunSuite
+
 import scala.collection.mutable.ArrayBuffer
 
 class CartaTest extends FunSuite{

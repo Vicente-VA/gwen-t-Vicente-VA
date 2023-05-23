@@ -3,8 +3,10 @@
 * Ademas, sete debe poder robar cartas de su mazo y jugar cartas de su mano*/
 package cl.uchile.dcc
 package gwent.definitions
-import scala.collection.mutable
 
+import cl.uchile.dcc.gwent.definitions.carta.{Carta, Clima, Unidad}
+
+import scala.collection.mutable
 import munit.FunSuite
 
 import scala.collection.mutable.{ArrayBuffer, ArrayStack}

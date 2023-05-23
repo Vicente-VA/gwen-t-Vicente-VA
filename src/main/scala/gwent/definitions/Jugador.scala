@@ -3,6 +3,8 @@
 
 package cl.uchile.dcc
 package gwent.definitions
+import cl.uchile.dcc.gwent.definitions.carta.Carta
+
 import scala.collection.mutable
 
 trait JugadorTrait:
