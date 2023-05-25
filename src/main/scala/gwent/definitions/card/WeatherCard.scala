@@ -4,7 +4,7 @@ package gwent.definitions.card
 /** Clima, card jugable al centro
  *
  * @constructor crea una card de clima con nombre
- * @param nombre es el nombre de la card.
+ * @param name es el nombre de la card.
  *               es el unico valor pues el efecto que cause dependera de la card o el campo afectado
  */
 

@@ -22,6 +22,5 @@
       </map>
     </option>
     <option name="scala3DisclaimerShown" value="true" />
-    <option name="scalaTestDefaultSuperClass" value="org.scalatest.FunSuite" />
   </component>
 </project>
