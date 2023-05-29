@@ -2,30 +2,31 @@
 * ser colocada. Las cartas de unidad se pueden colocar en las zonas de CaC, Distancia o Asedio dependiendo
 * del tipo que sea*/
 package cl.uchile.dcc
-package gwent.definitions
-import cl.uchile.dcc.gwent.definitions.card.{Clima, Unidad}
+package definitions.card
 
-import scala.collection.mutable
+import gwent.definitions.card.{Clima, Unidad}
+
 import munit.FunSuite
 
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class CartaTest extends FunSuite{
+class CardTest extends FunSuite {
   var Carta_1: Unidad = _
   var Carta_2: Clima = _
   var Carta_3: Clima = _
   var Carta_4: Unidad = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    Carta_1 = new Unidad("Guerrero","CaC",4,null)
+    Carta_1 = new Unidad("Guerrero", "CaC", 4, null)
     Carta_2 = new Clima("Soleado")
     Carta_3 = new Clima("")
-    Carta_4 = new Unidad("","",-5,null)
+    Carta_4 = new Unidad("", "", -5, null)
   }
 
-  test("equals"){
+  test("equals") {
     assertEquals(Carta_1, Carta_1)
-    assertEquals(Carta_2,Carta_2)
+    assertEquals(Carta_2, Carta_2)
     assertEquals(Carta_2, new Clima("Soleado"))
     assert(!Carta_1.equals(new Clima("")))
     assert(Carta_1.equals(new Unidad("Guerrero", "CaC", 4, null)))
@@ -50,7 +51,7 @@ class CartaTest extends FunSuite{
     assert(Carta_4.ver_fuerza() == 0)
   }
 
-  test("Unidad tiene clase, y puede ser CaC, Distancia o Asedio"){
+  test("Unidad tiene clase, y puede ser CaC, Distancia o Asedio") {
     var Clases: List[String] = List("CaC", "Distancia", "Asedio")
     assert(Clases.contains(Carta_1.ver_clase()))
     assert(Clases.contains(Carta_4.ver_clase()))
