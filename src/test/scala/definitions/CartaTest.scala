@@ -33,7 +33,7 @@ class CartaTest extends FunSuite{
     assert(!Carta_1.equals(Carta_4))
   }
 
-  test("La card tiene nombre") {
+  test("La card tiene name") {
     assert(Carta_1.ver_nombre() == "Guerrero")
     assert(Carta_2.ver_nombre() != null)
     assert(Carta_3.ver_nombre().nonEmpty)

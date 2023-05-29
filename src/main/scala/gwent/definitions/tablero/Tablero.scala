@@ -1,12 +1,13 @@
 package cl.uchile.dcc
 package gwent.definitions.tablero
 
-trait TableroTrait:
-  var sideA: List[Seccion]
-  var sideB: List[Seccion]
+import gwent.definitions.card.WeatherCard
+import cl.uchile.dcc.gwent.definitions.Player
 
-class Tablero extends TableroTrait{
-  var sideA: List[Seccion] = List(new CuerpoCuerpoSeccion(), new DistanciaSeccion, new AsedioSeccion)
+trait TableroTrait{
+  var weatherSection: WeatherCard
+}
 
+class Tablero(P1: Player, P2: Player) extends TableroTrait{
 
 }
