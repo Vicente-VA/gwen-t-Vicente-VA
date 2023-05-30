@@ -4,7 +4,8 @@
 package cl.uchile.dcc
 package gwent.definitions
 
-import cl.uchile.dcc.gwent.definitions.card.{Card, Clima, Unidad}
+import cl.uchile.dcc.gwent.definitions.board.Board
+import cl.uchile.dcc.gwent.definitions.card.Card
 
 import scala.collection.mutable
 import munit.FunSuite
@@ -34,24 +35,24 @@ class PlayerTest extends FunSuite {
   }
 
   test("El jugador tiene name") {
-    assert(Jugador_1.ver_nombre() == "P1")
-    assert(Jugador_2.ver_nombre() != null)
-    assert(Jugador_2.ver_nombre().nonEmpty)
+    assert(Jugador_1.getName() == "P1")
+    assert(Jugador_2.getName() != null)
+    assert(Jugador_2.getName().nonEmpty)
   }
 
   test("El jugador tiene deck de cartas") {
-    assert(Jugador_1.ver_mazo().length >= 0)
-    assert(Jugador_2.ver_mazo() != null)
+    assert(Jugador_1.getDeck().length >= 0)
+    assert(Jugador_2.getDeck() != null)
   }
 
   test("El jugador tiene mano de cartas") {
-    assert(Jugador_1.ver_mano().length >= 0)
-    assert(Jugador_2.ver_mano() != null)
+    assert(Jugador_1.getHand().length >= 0)
+    assert(Jugador_2.getHand() != null)
   }
 
   test("El jugador comienza con 2 gemas") {
-    assert(Jugador_1.cuanta_vida() == 2)
-    val nuevoJugador = new Player("", new Array[Card](0), new Array[Card](0))
+    assert(Jugador_1.getGems() == 2)
+    val nuevoJugador = new Player("", new Array[Card](0), new Board())
     assert(nuevoJugador.cuanta_vida() == 2)
   }
 

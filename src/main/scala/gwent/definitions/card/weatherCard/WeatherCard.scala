@@ -1,5 +1,8 @@
 package cl.uchile.dcc
-package gwent.definitions.card
+package gwent.definitions.card.weatherCard
+
+import gwent.definitions.Player
+import gwent.definitions.card.Card
 
 /** Clima, card jugable al centro
  *
@@ -9,6 +12,8 @@ package gwent.definitions.card
  */
 
 class WeatherCard(val name: String, val description: String) extends Card{
+
+
   def canEqual(that: Any): Boolean = that.isInstanceOf[WeatherCard]
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
@@ -17,6 +22,10 @@ class WeatherCard(val name: String, val description: String) extends Card{
         (this.name == other.name &&
           this.description == other.description)
     } else false
+  }
+
+  def play(player: Player): Unit = {
+    player.playWeatherCard(this)
   }
 }
 

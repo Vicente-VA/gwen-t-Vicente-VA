@@ -1,10 +1,9 @@
 package cl.uchile.dcc
 package gwent.definitions.board
 
-import gwent.definitions.card.WeatherCard
-
 import cl.uchile.dcc.gwent.definitions.Player
 import cl.uchile.dcc.gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, SiegeCard}
+import cl.uchile.dcc.gwent.definitions.card.weatherCard.WeatherCard
 
 import scala.collection.mutable
 

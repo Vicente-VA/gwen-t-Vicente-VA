@@ -1,5 +1,8 @@
 package cl.uchile.dcc
-package gwent.definitions.card
+package gwent.definitions.card.unit_card
+
+import gwent.definitions.Player
+import gwent.definitions.card.Card
 
 
 
@@ -12,7 +15,7 @@ package gwent.definitions.card
  */
 abstract class AbstractUnitCard protected(val name: String, val description: String,
                                           val strength: Int) extends Card{
-  var currentStrength: Int = this.strength
+  private var currentStrength: Int = this.strength
   if (this.currentStrength < 0) {
     this.currentStrength = 0
   }
