@@ -4,9 +4,12 @@
 package cl.uchile.dcc
 package gwent.definitions.card
 
+import cl.uchile.dcc.gwent.definitions.board.Board
+
 import scala.collection.mutable
 
 trait Card{
   val name: String
   val description: String
+  def play(board: Board): Unit
 }

@@ -13,15 +13,17 @@ import scala.collection.mutable.{ArrayBuffer, ArrayStack}
 import scala.runtime.stdLibPatches.Predef.assert
 
 class PlayerTest extends FunSuite {
-  var arr_void: Array[Card] = Array()
-  var mazo_inicial: Array[Card] = Array(new Unidad("Felipe", "Distancia", 1, None), new Clima("Soleado"))
-  var mano_inicial: Array[Card] = Array()
-  var Jugador_1: Player = new Player("", arr_void, arr_void)
-  var Jugador_2: Player = new Player("", arr_void, arr_void)
+  def empty_array(): ArrayBuffer[Card] = {
+    new ArrayBuffer[Card]
+  }
+  var mazo_inicial: ArrayBuffer[Card] = ???
+  var mano_inicial: ArrayBuffer[Card] = empty_array()
+  var Jugador_1: Player = new Player("", empty_array())
+  var Jugador_2: Player = new Player("", empty_array())
 
   override def beforeEach(context: BeforeEach): Unit = {
-    Jugador_1 = new Player("P1", mazo_inicial, mano_inicial)
-    Jugador_2 = new Player("", new Array[Card](0), new Array[Card](0))
+    Jugador_1 = new Player("P1", empty_array(), empty_array())
+    Jugador_2 = new Player("", empty_array())
   }
 
   test("equals") {
