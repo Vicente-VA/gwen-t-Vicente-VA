@@ -1,9 +1,8 @@
 package cl.uchile.dcc
 package gwent.definitions.card.unit_card
 
-import gwent.definitions.Player
 import gwent.definitions.card.Card
-
+import cl.uchile.dcc.gwent.definitions.Player
 
 
 /** AbstractUnitCard: Clase abstracta para las cartas de unidad
@@ -32,5 +31,9 @@ abstract class AbstractUnitCard protected(val name: String, val description: Str
           this.strength == other.strength &&
           this.description == other.description)
     } else false
+  }
+  
+  def getName: String = {
+    this.name
   }
 }

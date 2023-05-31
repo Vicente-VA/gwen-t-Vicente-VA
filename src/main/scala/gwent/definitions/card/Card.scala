@@ -13,4 +13,6 @@ trait Card{
   val name: String
   val description: String
   def play(player: Player): Unit
+  
+  def getName: String
 }

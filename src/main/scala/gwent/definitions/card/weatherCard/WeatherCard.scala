@@ -1,8 +1,8 @@
 package cl.uchile.dcc
 package gwent.definitions.card.weatherCard
 
-import gwent.definitions.Player
 import gwent.definitions.card.Card
+import cl.uchile.dcc.gwent.definitions.Player
 
 /** Clima, card jugable al centro
  *
@@ -26,6 +26,10 @@ class WeatherCard(val name: String, val description: String) extends Card{
 
   def play(player: Player): Unit = {
     player.playWeatherCard(this)
+  }
+
+  def getName: String = {
+    this.name
   }
 }
 

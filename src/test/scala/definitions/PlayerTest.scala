@@ -6,6 +6,7 @@ package gwent.definitions
 
 import cl.uchile.dcc.gwent.definitions.board.Board
 import cl.uchile.dcc.gwent.definitions.card.Card
+import cl.uchile.dcc.gwent.definitions.card.weatherCard.WeatherCard
 
 import scala.collection.mutable
 import munit.FunSuite
@@ -17,54 +18,57 @@ class PlayerTest extends FunSuite {
   def empty_array(): ArrayBuffer[Card] = {
     new ArrayBuffer[Card]
   }
-  var mazo_inicial: ArrayBuffer[Card] = ???
+  var mazo_inicial: ArrayBuffer[Card] = empty_array()
   var mano_inicial: ArrayBuffer[Card] = empty_array()
-  var Jugador_1: Player = new Player("", empty_array())
-  var Jugador_2: Player = new Player("", empty_array())
+  var nullPlayer: Player = new Player("",empty_array(), new Board(nullPlayer, nullPlayer))
+  var player1: Player = new Player("", empty_array(), new Board(player1, player1))
+  var player2: Player = new Player("", empty_array(), new Board(player2, player2))
+  var board = new Board(player1, player2)
 
   override def beforeEach(context: BeforeEach): Unit = {
-    Jugador_1 = new Player("P1", empty_array(), empty_array())
-    Jugador_2 = new Player("", empty_array())
+    player1 = new Player("P1", empty_array(), new Board(player1, nullPlayer))
+    player2 = new Player("", empty_array(), new Board(player))
+    board = new Board(player1, player2)
   }
 
   test("equals") {
-    assertEquals(Jugador_1, Jugador_1)
-    assertEquals(Jugador_1, new Player("P1", mazo_inicial, mazo_inicial))
-    assert(!Jugador_1.equals(Jugador_2))
-    assert(!Jugador_1.equals(new Clima("A")))
+    assertEquals(player1, player1)
+    assertEquals(player1, new Player("P1", mazo_inicial, board))
+    assert(!player1.equals(player2))
+    assert(!player1.equals(new WeatherCard("Algo","Otro algo")))
   }
 
   test("El jugador tiene name") {
-    assert(Jugador_1.getName() == "P1")
-    assert(Jugador_2.getName() != null)
-    assert(Jugador_2.getName().nonEmpty)
+    assert(player1.getName() == "P1")
+    assert(player2.getName() != null)
+    assert(player2.getName().nonEmpty)
   }
 
   test("El jugador tiene deck de cartas") {
-    assert(Jugador_1.getDeck().length >= 0)
-    assert(Jugador_2.getDeck() != null)
+    assert(player1.getDeck().length >= 0)
+    assert(player2.getDeck() != null)
   }
 
   test("El jugador tiene mano de cartas") {
-    assert(Jugador_1.getHand().length >= 0)
-    assert(Jugador_2.getHand() != null)
+    assert(player1.getHand().length >= 0)
+    assert(player2.getHand() != null)
   }
 
   test("El jugador comienza con 2 gemas") {
-    assert(Jugador_1.getGems() == 2)
+    assert(player1.getGems() == 2)
     val nuevoJugador = new Player("", new Array[Card](0), new Board())
     assert(nuevoJugador.cuanta_vida() == 2)
   }
 
   /*
     test("El jugador puede robar cartas del deck"){
-      var l_mano = Jugador_1.ver_mano().length
-      var l_mazo = Jugador_1.ver_mazo().length
-      Jugador_1.robar()
-      assert(Jugador_1.ver_mazo().length == l_mazo-1)
-      assert(Jugador_1.ver_mano().length == l_mano + 1)
-      Jugador_1.jugar()
-      assert(Jugador_1.ver_mano().length == l_mano - 1)
+      var l_mano = player1.ver_mano().length
+      var l_mazo = player1.ver_mazo().length
+      player1.robar()
+      assert(player1.ver_mazo().length == l_mazo-1)
+      assert(player1.ver_mano().length == l_mano + 1)
+      player1.jugar()
+      assert(player1.ver_mano().length == l_mano - 1)
     }
 
     test("El jugador puede jugar cartas de su mano"){
