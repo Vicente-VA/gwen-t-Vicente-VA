@@ -19,8 +19,8 @@ class Board(P1: Player, P2: Player) extends IBoard {
   P1.setBoard(this)
   P2.setBoard(this)
 
-  var weatherSection: WeatherCard = WeatherCard("Clear","")
-  val playerSections: mutable.Map[Player,Section] = mutable.Map(
+  private var weatherSection: WeatherCard = WeatherCard("Clear","")
+  private val playerSections: Map[Player,Section] = Map(
     P1 -> new Section(),
     P2 -> new Section()
   )
@@ -41,4 +41,9 @@ class Board(P1: Player, P2: Player) extends IBoard {
     playerSections(player).playSiegeCard(card)
     true
   }
+
+  def getWeatherSection: WeatherCard = {
+    this.weatherSection
+  }
+  def getPlayerSection: Map[Player, Section] = this.playerSections
 }

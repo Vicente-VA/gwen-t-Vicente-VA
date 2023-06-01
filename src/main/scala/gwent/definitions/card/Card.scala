@@ -12,6 +12,6 @@ trait Card{
   val name: String
   val description: String
   def play(player: Player): Unit
-  
+  def equals(that: Any): Boolean
   def getName: String
 }

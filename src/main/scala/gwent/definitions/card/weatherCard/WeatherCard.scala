@@ -4,7 +4,7 @@ package gwent.definitions.card.weatherCard
 import gwent.definitions.card.Card
 import cl.uchile.dcc.gwent.definitions.Player
 
-/** Clima, card jugable al centro
+/** Carta de clima, jugable en WeatherSection del tablero
  *
  * @constructor crea una card de clima con name
  * @param name es el name de la card.

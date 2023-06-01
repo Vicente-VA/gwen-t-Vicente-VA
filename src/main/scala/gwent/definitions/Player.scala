@@ -17,7 +17,7 @@ import scala.collection.mutable.ArrayBuffer
 class Player(private var Name: String, private val Deck: ArrayBuffer[Card]) extends IPlayUnit with IPlayWeather{
   private var name = Name
   private var gems: Int = 2
-  private val deck: ArrayBuffer[Card] = deck.map(identity)
+  private val deck: ArrayBuffer[Card] = Deck.map(identity)
   private val hand: ArrayBuffer[Card] = ArrayBuffer()
   private var board: IBoard = NullBoard()
   if (this.name.isEmpty) {
@@ -65,7 +65,7 @@ class Player(private var Name: String, private val Deck: ArrayBuffer[Card]) exte
     }
   }
 
-  private def canEqual(that: Any): Boolean = that.isInstanceOf[Player]
+  private def canEqual(that: Any): Boolean = {this.getClass.getName == that.getClass.getName}
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[Player]
@@ -81,6 +81,7 @@ class Player(private var Name: String, private val Deck: ArrayBuffer[Card]) exte
   def getDeck: ArrayBuffer[Card] = this.deck
   def getHand: ArrayBuffer[Card] = this.hand
   def getGems: Int = this.gems
+  def getBoard: IBoard = this.board
 
   def setGems(i: Int): Unit = {this.gems += i}
   def setBoard(someBoard: IBoard): Unit = {this.board = someBoard}

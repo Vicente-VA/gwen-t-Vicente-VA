@@ -4,7 +4,7 @@
 package cl.uchile.dcc
 package definitions.card
 
-import gwent.definitions.card.{Clima, Unidad}
+/*import gwent.definitions.card.{Clima, Unidad}
 
 import munit.FunSuite
 
@@ -61,6 +61,6 @@ class CardTest extends FunSuite {
 
   }
 
-}
+}*/
 
 

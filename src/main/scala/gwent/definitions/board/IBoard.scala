@@ -11,4 +11,6 @@ trait IBoard {
   def playDistanceCard(p: Player, c: DistanceCard): Boolean
   def playSiegeCard(p: Player, c: SiegeCard): Boolean
   def playWeatherCard(c: WeatherCard): Boolean
+  
+  def getPlayerSection: Map[Player, Section]
 }
