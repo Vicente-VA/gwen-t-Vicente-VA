@@ -5,7 +5,6 @@ package cl.uchile.dcc
 package gwent.definitions.card
 
 import cl.uchile.dcc.gwent.definitions.Player
-import cl.uchile.dcc.gwent.definitions.board.Board
 
 import scala.collection.mutable
 

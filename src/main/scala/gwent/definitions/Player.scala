@@ -4,43 +4,65 @@
 package cl.uchile.dcc
 package gwent.definitions
 
-import gwent.definitions.board.{Board, Section}
-import gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, SiegeCard}
-import gwent.definitions.card.weatherCard.WeatherCard
+import gwent.definitions.board
+import gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
+import gwent.definitions.card.weatherCard.{IPlayWeather, WeatherCard}
 import gwent.definitions.card.{Card, PlayCard}
+
+import cl.uchile.dcc.gwent.definitions.board.{IBoard,Board,NullBoard}
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class Player(private var name: String, private val deck: ArrayBuffer[Card]) extends PlayCard{
-  private var Gems: Int = 2
-  private val Deck: ArrayBuffer[Card] = deck.map(identity)
-  private val Hand: ArrayBuffer[Card] = ArrayBuffer()
-  private var board: Option[Board] = None
+class Player(private var Name: String, private val Deck: ArrayBuffer[Card]) extends IPlayUnit with IPlayWeather{
+  private var name = Name
+  private var gems: Int = 2
+  private val deck: ArrayBuffer[Card] = deck.map(identity)
+  private val hand: ArrayBuffer[Card] = ArrayBuffer()
+  private var board: IBoard = NullBoard()
   if (this.name.isEmpty) {
     this.name = "Player"
   }
 
   def playCard(card: Card): Unit ={
-    val ind = this.Hand.indexWhere(_.getName == card.getName)
+    val ind = this.hand.indexWhere(_.getName == card.getName)
     if(ind == -1){
       println("There's no such card on your hand!")
     } else {
-      Hand(ind).play(this)
-      Hand.remove(ind)
+      this.hand(ind).play(this)
     }
   }
   def playCloseCombatCard(card: CloseCombatCard): Unit = {
-    board.foreach(_.playCloseCombatCard(this, card))
+    val ind = this.hand.indexWhere(_.getName == card.getName)
+    if(this.board.playCloseCombatCard(this, card)){
+      this.hand.remove(ind)
+    } else {
+      println("You cannot play this card!")
+    }
   }
   def playDistanceCard(card: DistanceCard): Unit = {
-    board.foreach(_.playDistanceCard(this, card))
+    val ind = this.hand.indexWhere(_.getName == card.getName)
+    if (this.board.playDistanceCard(this, card)) {
+      this.hand.remove(ind)
+    } else {
+      println("You cannot play this card!")
+    }
   }
   def playSiegeCard(card: SiegeCard): Unit = {
-    board.foreach(_.playSiegeCard(this, card))
+    val ind = this.hand.indexWhere(_.getName == card.getName)
+    if (this.board.playSiegeCard(this, card)) {
+      this.hand.remove(ind)
+    } else {
+      println("You cannot play this card!")
+    }
   }
   def playWeatherCard(card: WeatherCard): Unit = {
-    board.foreach(_.playWeatherCard(card))
+    val ind = this.hand.indexWhere(_.getName == card.getName)
+    if (this.board.playWeatherCard(card)) {
+      this.hand.remove(ind)
+    } else {
+      println("You cannot play this card!")
+    }
   }
 
   private def canEqual(that: Any): Boolean = that.isInstanceOf[Player]
@@ -49,17 +71,17 @@ class Player(private var name: String, private val deck: ArrayBuffer[Card]) exte
       val other = that.asInstanceOf[Player]
       (this eq other) ||
         (this.name == other.getName &&
-          this.Gems == other.getGems &&
-          this.Deck == other.getDeck &&
-          this.Hand == other.getHand)
+          this.gems == other.getGems &&
+          this.deck == other.getDeck &&
+          this.hand == other.getHand)
     } else false
   }
 
   def getName: String = this.name
-  def getDeck: ArrayBuffer[Card] = this.Deck
-  def getHand: ArrayBuffer[Card] = this.Hand
-  def getGems: Int = this.Gems
+  def getDeck: ArrayBuffer[Card] = this.deck
+  def getHand: ArrayBuffer[Card] = this.hand
+  def getGems: Int = this.gems
 
-  def setGems(i: Int): Unit = {this.Gems += i}
-  def setBoard(someBoard: Board): Unit = {this.board = Some(someBoard)}
+  def setGems(i: Int): Unit = {this.gems += i}
+  def setBoard(someBoard: IBoard): Unit = {this.board = someBoard}
 }
