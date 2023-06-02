@@ -14,7 +14,7 @@ import cl.uchile.dcc.gwent.definitions.board.{IBoard,Board,NullBoard}
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class Player(private var Name: String, private val Deck: ArrayBuffer[Card]) extends IPlayUnit with IPlayWeather{
+class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) extends IPlayUnit with IPlayWeather{
   private var name = Name
   private var gems: Int = 2
   private val deck: ArrayBuffer[Card] = Deck.map(identity)
@@ -65,6 +65,15 @@ class Player(private var Name: String, private val Deck: ArrayBuffer[Card]) exte
     }
   }
 
+/*  def drawCard(int: Int): Unit = {
+    if(deck.length < int){
+      drawCard(deck.length)
+    } else {
+
+    }
+  }
+*/
+
   private def canEqual(that: Any): Boolean = {this.getClass.getName == that.getClass.getName}
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
@@ -77,9 +86,13 @@ class Player(private var Name: String, private val Deck: ArrayBuffer[Card]) exte
     } else false
   }
 
+  def addToHand(card: Card): Unit = {
+    this.hand += card
+  }
+
   def getName: String = this.name
   def getDeck: ArrayBuffer[Card] = this.deck
-  def getHand: ArrayBuffer[Card] = this.hand
+  def getHand: ArrayBuffer[Card] = this.hand.map(identity)
   def getGems: Int = this.gems
   def getBoard: IBoard = this.board
 
