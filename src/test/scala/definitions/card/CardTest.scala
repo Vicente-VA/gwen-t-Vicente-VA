@@ -4,63 +4,48 @@
 package cl.uchile.dcc
 package definitions.card
 
-/*import gwent.definitions.card.{Clima, Unidad}
 
+import cl.uchile.dcc.gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, SiegeCard}
+import cl.uchile.dcc.gwent.definitions.card.weatherCard.WeatherCard
 import munit.FunSuite
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 class CardTest extends FunSuite {
-  var Carta_1: Unidad = _
-  var Carta_2: Clima = _
-  var Carta_3: Clima = _
-  var Carta_4: Unidad = _
+  val exWeather = new WeatherCard("Sunny", "It's a beautiful day outside")
+  val exCloseCombat = new CloseCombatCard("Pablo", "El mismisimo", 3)
+  val exSiege = new SiegeCard("Alejandro", "No se que es asedio", 5)
+  val exDistance = new DistanceCard("Felipe", "Ta muy lejos", 4)
 
   override def beforeEach(context: BeforeEach): Unit = {
-    Carta_1 = new Unidad("Guerrero", "CaC", 4, null)
-    Carta_2 = new Clima("Soleado")
-    Carta_3 = new Clima("")
-    Carta_4 = new Unidad("", "", -5, null)
+    val exWeather = new WeatherCard("Sunny", "It's a beautiful day outside")
+    val exCloseCombat = new CloseCombatCard("Pablo", "El mismisimo", 3)
+    val exSiege = new SiegeCard("Alejandro", "No se que es asedio", 5)
+    val exDistance = new DistanceCard("Felipe", "Ta muy lejos", 4)
   }
 
   test("equals") {
-    assertEquals(Carta_1, Carta_1)
-    assertEquals(Carta_2, Carta_2)
-    assertEquals(Carta_2, new Clima("Soleado"))
-    assert(!Carta_1.equals(new Clima("")))
-    assert(Carta_1.equals(new Unidad("Guerrero", "CaC", 4, null)))
-    assert(!Carta_2.equals(Carta_1))
-    assert(!Carta_1.equals(Carta_4))
+    assertEquals(exWeather, exWeather)
+    assertEquals(exDistance, exDistance)
+    assertEquals(exSiege, new SiegeCard("Alejandro", "No se que es asedio", 5))
+    assert(!exSiege.equals(CloseCombatCard("Pablo","Backyardigan",1)))
+    assert(!exCloseCombat.equals(new CloseCombatCard("Pablo", "El mismisimo", 4)))
+    assert(!exCloseCombat.equals(exWeather))
+    assert(!exWeather.equals(new WeatherCard("Bubbles","zaza")))
   }
 
   test("La card tiene name") {
-    assert(Carta_1.ver_nombre() == "Guerrero")
-    assert(Carta_2.ver_nombre() != null)
-    assert(Carta_3.ver_nombre().nonEmpty)
+    assert(exSiege.getName == "Alejandro")
+    assert(exWeather.getName == "Sunny")
+    assert(exCloseCombat.getName.nonEmpty)
   }
 
-  test("La card tiene una clase, y esta puede ser 'Unidad' o 'Clima' ") {
-    assert(Carta_1.ver_tipo() == "Unidad")
-    assert(Carta_2.ver_tipo() == "Clima")
-    assert(Carta_3.ver_tipo() == "Clima")
+  test("Las cartas de unidad tienen un valor Fuerza, y este es mayor o igual a 0") {
+    assert(exCloseCombat.getStrength >= 0)
+    assert(new CloseCombatCard("","", -56).getStrength == 0)
   }
 
-  test("Unidad tiene un valor Fuerza, y este es mayor o igual a 0") {
-    assert(Carta_1.ver_fuerza() >= 0)
-    assert(Carta_4.ver_fuerza() == 0)
-  }
-
-  test("Unidad tiene clase, y puede ser CaC, Distancia o Asedio") {
-    var Clases: List[String] = List("CaC", "Distancia", "Asedio")
-    assert(Clases.contains(Carta_1.ver_clase()))
-    assert(Clases.contains(Carta_4.ver_clase()))
-  }
-
-  test("La card puede tener una habilidad especial, y puede no tenerla") {
-
-  }
-
-}*/
+}
 
 

@@ -67,7 +67,6 @@ class PlayerTest extends FunSuite {
     assertEquals(nuevoJugador.getBoard, new NullBoard)
   }
 
-
 /*  test("El jugador puede robar cartas del mazo"){
     var l_mano = player1.ver_mano().length
     var l_mazo = player1.ver_mazo().length
@@ -78,10 +77,31 @@ class PlayerTest extends FunSuite {
     assert(player1.ver_mano().length == l_mano - 1)
   }*/
 
-  test("El jugador puede jugar cartas de su mano"){
-    var len = player1.getDeck.length
-    player1.drawCard(len)
+  test("El jugador puede jugar cartas de Clima de su mano"){
+    player1.addToHand(exWeather)
     player1.playCard(player1.getHand(0))
+    assertEquals(board.getWeatherSection, exWeather)
+  }
+
+  test("El jugador puede jugar cartas de Asedio de su mano") {
+    player1.addToHand(exSiege)
+    player1.playCard(player1.getHand(0))
+    val siegeOnBoard = board.getPlayerSection(player1).getSiegeField(0)
+    assertEquals(siegeOnBoard, exSiege)
+  }
+
+  test ("El jugador puede jugar cartas de Distancia de su mano") {
+    player1.addToHand(exDistance)
+    player1.playCard(player1.getHand(0))
+    val distanceOnBoard = board.getPlayerSection(player1).getDistanceField(0)
+    assertEquals(distanceOnBoard, exDistance)
+  }
+
+  test("El jugador puede jugar cartas de CuerpoCuerpo de su mano") {
+    player1.addToHand(exCloseCombat)
+    player1.playCard(player1.getHand(0))
+    val ccOnBoard = board.getPlayerSection(player1).getCloseCombatField(0)
+    assertEquals(ccOnBoard, exCloseCombat)
   }
 }
 

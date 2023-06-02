@@ -11,7 +11,7 @@ import scala.collection.mutable
 trait Card{
   val name: String
   val description: String
-  def play(player: Player): Unit
+  def play(player: Player): Boolean
   def equals(that: Any): Boolean
   def getName: String
 }

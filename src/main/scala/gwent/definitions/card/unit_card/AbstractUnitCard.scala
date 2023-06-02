@@ -18,21 +18,9 @@ abstract class AbstractUnitCard protected(val name: String, val description: Str
   if (this.currentStrength < 0) {
     this.currentStrength = 0
   }
-  def get_str(): Int = {
+  def getStrength: Int = {
     this.currentStrength
-  }
-
-  def canEqual(that: Any): Boolean = that.isInstanceOf[AbstractUnitCard]
-  override def equals(that: Any): Boolean = {
-    if (canEqual(that)) {
-      val other = that.asInstanceOf[AbstractUnitCard]
-      (this eq other) ||
-        (this.name == other.name &&
-          this.strength == other.strength &&
-          this.description == other.description)
-    } else false
-  }
-  
+  }  
   def getName: String = {
     this.name
   }

@@ -14,7 +14,7 @@ import cl.uchile.dcc.gwent.definitions.board.{IBoard,Board,NullBoard}
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) extends IPlayUnit with IPlayWeather{
+class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) extends IPlayUnit with IPlayWeather {
   private var name = Name
   private var gems: Int = 2
   private val deck: ArrayBuffer[Card] = Deck.map(identity)
@@ -24,44 +24,59 @@ class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) exte
     this.name = "Player"
   }
 
-  def playCard(card: Card): Unit ={
+  def playCard(card: Card): Boolean ={
     val ind = this.hand.indexWhere(_.getName == card.getName)
     if(ind == -1){
       println("There's no such card on your hand!")
+      false
     } else {
       this.hand(ind).play(this)
     }
   }
-  def playCloseCombatCard(card: CloseCombatCard): Unit = {
+
+  def playCloseCombatCard(card: CloseCombatCard): Boolean = {
     val ind = this.hand.indexWhere(_.getName == card.getName)
-    if(this.board.playCloseCombatCard(this, card)){
+    val didPlayCard: Boolean = this.board.playCloseCombatCard(this, card)
+    if (didPlayCard) {
       this.hand.remove(ind)
+      true
     } else {
       println("You cannot play this card!")
+      false
     }
   }
-  def playDistanceCard(card: DistanceCard): Unit = {
+  def playDistanceCard(card: DistanceCard): Boolean = {
     val ind = this.hand.indexWhere(_.getName == card.getName)
-    if (this.board.playDistanceCard(this, card)) {
+    val didPlayCard: Boolean = this.board.playDistanceCard(this, card)
+    if (didPlayCard) {
       this.hand.remove(ind)
+      true
     } else {
       println("You cannot play this card!")
+      false
     }
   }
-  def playSiegeCard(card: SiegeCard): Unit = {
+
+  def playSiegeCard(card: SiegeCard): Boolean = {
     val ind = this.hand.indexWhere(_.getName == card.getName)
-    if (this.board.playSiegeCard(this, card)) {
+    val didPlayCard: Boolean = this.board.playSiegeCard(this, card)
+    if (didPlayCard) {
       this.hand.remove(ind)
+      true
     } else {
       println("You cannot play this card!")
+      false
     }
   }
-  def playWeatherCard(card: WeatherCard): Unit = {
+  def playWeatherCard(card: WeatherCard): Boolean = {
     val ind = this.hand.indexWhere(_.getName == card.getName)
-    if (this.board.playWeatherCard(card)) {
+    val didPlayCard: Boolean = this.board.playWeatherCard(card)
+    if (didPlayCard) {
       this.hand.remove(ind)
+      true
     } else {
       println("You cannot play this card!")
+      false
     }
   }
 

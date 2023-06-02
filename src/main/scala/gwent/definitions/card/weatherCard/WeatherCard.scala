@@ -11,10 +11,10 @@ import cl.uchile.dcc.gwent.definitions.Player
  *               es el unico valor pues el efecto que cause dependera de la card o el campo afectado
  */
 
-class WeatherCard(val name: String, val description: String) extends Card{
+class WeatherCard(val name: String, val description: String) extends Card {
 
 
-  def canEqual(that: Any): Boolean = that.isInstanceOf[WeatherCard]
+  def canEqual(that: Any): Boolean = {this.getClass.getName == that.getClass.getName}
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[WeatherCard]
@@ -24,7 +24,7 @@ class WeatherCard(val name: String, val description: String) extends Card{
     } else false
   }
 
-  def play(player: Player): Unit = {
+  def play(player: Player): Boolean = {
     player.playWeatherCard(this)
   }
 

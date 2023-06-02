@@ -31,19 +31,14 @@ class Board(P1: Player, P2: Player) extends IBoard {
   }
   def playCloseCombatCard(player: Player, card: CloseCombatCard): Boolean = {
     playerSections(player).playCloseCombatCard(card)
-    true
   }
   def playDistanceCard(player: Player, card: DistanceCard): Boolean = {
     playerSections(player).playDistanceCard(card)
-    true
   }
   def playSiegeCard(player: Player, card: SiegeCard): Boolean = {
     playerSections(player).playSiegeCard(card)
-    true
   }
 
-  def getWeatherSection: WeatherCard = {
-    this.weatherSection
-  }
+  def getWeatherSection: WeatherCard = this.weatherSection
   def getPlayerSection: Map[Player, Section] = this.playerSections
 }
