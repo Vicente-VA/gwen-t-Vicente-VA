@@ -62,46 +62,76 @@ class PlayerTest extends FunSuite {
     assert(nuevoJugador.getGems == 2)
   }
 
-  test("El jugador comienza con un tablero nulo"){
+  test("La cantidad de gemas puede ser modificada"){
+    player1.setGems(1)
+    assertEquals(player1.getGems, 1)
+    player1.setGems(-10)
+    assertEquals(player1.getGems, 0)
+  }
+
+  test("El jugador se inicializa con un tablero nulo"){
     val nuevoJugador = new Player("", ArrayBuffer[Card]())
     assertEquals(nuevoJugador.getBoard, new NullBoard)
   }
 
-/*  test("El jugador puede robar cartas del mazo"){
-    var l_mano = player1.ver_mano().length
-    var l_mazo = player1.ver_mazo().length
-    player1.robar()
-    assert(player1.ver_mazo().length == l_mazo-1)
-    assert(player1.ver_mano().length == l_mano + 1)
-    player1.jugar()
-    assert(player1.ver_mano().length == l_mano - 1)
-  }*/
+  test("El jugador puede robar cartas del mazo") {
+    player1.drawCard(2)
+    assert(player1.getDeck.length == 2)
+    assert(player1.getHand.length == 2)
+
+    player1.drawCard(-5)
+    assert(player1.getDeck.length == 2)
+
+    player1.drawCard(10)
+    assert(player1.getHand.length == 4)
+    assert(player1.getDeck.isEmpty)
+
+    player1.drawCard(10)
+    assertEquals(player1.getHand.length, 4)
+  }
+
 
   test("El jugador puede jugar cartas de Clima de su mano"){
-    player1.addToHand(exWeather)
-    player1.playCard(player1.getHand(0))
+    player1.drawCard(4)
+    player1.playCard(exWeather)
     assertEquals(board.getWeatherSection, exWeather)
+    assertEquals(player1.getHand.length,3)
   }
 
   test("El jugador puede jugar cartas de Asedio de su mano") {
-    player1.addToHand(exSiege)
-    player1.playCard(player1.getHand(0))
+    player1.drawCard(4)
+    player1.playCard(exSiege)
     val siegeOnBoard = board.getPlayerSection(player1).getSiegeField(0)
     assertEquals(siegeOnBoard, exSiege)
+    assertEquals(player1.getHand.length, 3)
   }
 
   test ("El jugador puede jugar cartas de Distancia de su mano") {
-    player1.addToHand(exDistance)
-    player1.playCard(player1.getHand(0))
-    val distanceOnBoard = board.getPlayerSection(player1).getDistanceField(0)
-    assertEquals(distanceOnBoard, exDistance)
+    player1.drawCard(4)
+    player1.playCard(exDistance)
+    val siegeOnBoard = board.getPlayerSection(player1).getDistanceField(0)
+    assertEquals(siegeOnBoard, exDistance)
+    assertEquals(player1.getHand.length, 3)
   }
 
   test("El jugador puede jugar cartas de CuerpoCuerpo de su mano") {
-    player1.addToHand(exCloseCombat)
-    player1.playCard(player1.getHand(0))
-    val ccOnBoard = board.getPlayerSection(player1).getCloseCombatField(0)
-    assertEquals(ccOnBoard, exCloseCombat)
+    player1.drawCard(4)
+    player1.playCard(exCloseCombat)
+    val siegeOnBoard = board.getPlayerSection(player1).getCloseCombatField(0)
+    assertEquals(siegeOnBoard, exCloseCombat)
+    assertEquals(player1.getHand.length, 3)
+  }
+
+  test("Un jugador no puede jugar cartas si no se ha inicializado un tablero"){
+    val nuevoJugador = new Player("P3", baseDeck)
+    nuevoJugador.drawCard(4)
+    assert(!nuevoJugador.playCard(exWeather))
+    assertEquals(nuevoJugador.getHand.length, 4)
+    assert(nuevoJugador.getHand.contains(exWeather))
+
+    assert(!nuevoJugador.playCard(exSiege))
+    assertEquals(nuevoJugador.getHand.length, 4)
+    assert(nuevoJugador.getHand.contains(exSiege))
   }
 }
 

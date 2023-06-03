@@ -13,4 +13,5 @@ trait IBoard {
   def playWeatherCard(c: WeatherCard): Boolean
   
   def getPlayerSection: Map[Player, Section]
+  def getWeatherSection: WeatherCard
 }

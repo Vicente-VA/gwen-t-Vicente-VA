@@ -14,10 +14,10 @@ import cl.uchile.dcc.gwent.definitions.board.{IBoard,Board,NullBoard}
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) extends IPlayUnit with IPlayWeather {
-  private var name = Name
+class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) extends IPlayUnit with IPlayWeather {
+  private var name = _name
   private var gems: Int = 2
-  private val deck: ArrayBuffer[Card] = Deck.map(identity)
+  private var deck: ArrayBuffer[Card] = _deck.map(identity)
   private val hand: ArrayBuffer[Card] = ArrayBuffer()
   private var board: IBoard = NullBoard()
   if (this.name.isEmpty) {
@@ -25,20 +25,20 @@ class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) exte
   }
 
   def playCard(card: Card): Boolean ={
-    val ind = this.hand.indexWhere(_.getName == card.getName)
+    val ind = hand.indexWhere(_.getName == card.getName)
     if(ind == -1){
       println("There's no such card on your hand!")
       false
     } else {
-      this.hand(ind).play(this)
+      hand(ind).play(this)
     }
   }
 
   def playCloseCombatCard(card: CloseCombatCard): Boolean = {
-    val ind = this.hand.indexWhere(_.getName == card.getName)
+    val ind = hand.indexWhere(_.getName == card.getName)
     val didPlayCard: Boolean = this.board.playCloseCombatCard(this, card)
     if (didPlayCard) {
-      this.hand.remove(ind)
+      hand.remove(ind)
       true
     } else {
       println("You cannot play this card!")
@@ -46,10 +46,10 @@ class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) exte
     }
   }
   def playDistanceCard(card: DistanceCard): Boolean = {
-    val ind = this.hand.indexWhere(_.getName == card.getName)
-    val didPlayCard: Boolean = this.board.playDistanceCard(this, card)
+    val ind = hand.indexWhere(_.getName == card.getName)
+    val didPlayCard: Boolean = board.playDistanceCard(this, card)
     if (didPlayCard) {
-      this.hand.remove(ind)
+      hand.remove(ind)
       true
     } else {
       println("You cannot play this card!")
@@ -58,10 +58,10 @@ class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) exte
   }
 
   def playSiegeCard(card: SiegeCard): Boolean = {
-    val ind = this.hand.indexWhere(_.getName == card.getName)
+    val ind = hand.indexWhere(_.getName == card.getName)
     val didPlayCard: Boolean = this.board.playSiegeCard(this, card)
     if (didPlayCard) {
-      this.hand.remove(ind)
+      hand.remove(ind)
       true
     } else {
       println("You cannot play this card!")
@@ -69,10 +69,10 @@ class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) exte
     }
   }
   def playWeatherCard(card: WeatherCard): Boolean = {
-    val ind = this.hand.indexWhere(_.getName == card.getName)
+    val ind = hand.indexWhere(_.getName == card.getName)
     val didPlayCard: Boolean = this.board.playWeatherCard(card)
     if (didPlayCard) {
-      this.hand.remove(ind)
+      hand.remove(ind)
       true
     } else {
       println("You cannot play this card!")
@@ -80,37 +80,49 @@ class Player(private val Name: String, private val Deck: ArrayBuffer[Card]) exte
     }
   }
 
-/*  def drawCard(int: Int): Unit = {
-    if(deck.length < int){
-      drawCard(deck.length)
-    } else {
+  def shuffleDeck(): Unit = {
+    deck = scala.util.Random.shuffle(deck)
+  }
 
+  def drawCard(int: Int): Unit = {
+    if (deck.isEmpty){
+      println("Your deck is empty!")
+    }
+    else if(deck.length < int){
+      drawCard(deck.length)
+    }
+    else if (0 <= int){
+      hand ++= deck.take(int)
+      deck.remove(0,int)
+      shuffleDeck()
+    } else {
+      println("You can't draw a negative amount of cards!")
     }
   }
-*/
 
   private def canEqual(that: Any): Boolean = {this.getClass.getName == that.getClass.getName}
   override def equals(that: Any): Boolean = {
     if (canEqual(that)) {
       val other = that.asInstanceOf[Player]
       (this eq other) ||
-        (this.name == other.getName &&
-          this.gems == other.getGems &&
-          this.deck == other.getDeck &&
-          this.hand == other.getHand)
+        (name == other.getName &&
+          gems == other.getGems &&
+          deck == other.getDeck &&
+          hand == other.getHand)
     } else false
   }
 
-  def addToHand(card: Card): Unit = {
-    this.hand += card
+  def getName: String = name
+  def getDeck: ArrayBuffer[Card] = deck.map(identity)
+  def getHand: ArrayBuffer[Card] = hand.map(identity)
+  def getGems: Int = gems
+  def getBoard: IBoard = board
+
+  def setGems(int: Int): Unit = {
+    gems = int
+    if (gems < 0) {
+      gems = 0
+    }
   }
-
-  def getName: String = this.name
-  def getDeck: ArrayBuffer[Card] = this.deck
-  def getHand: ArrayBuffer[Card] = this.hand.map(identity)
-  def getGems: Int = this.gems
-  def getBoard: IBoard = this.board
-
-  def setGems(i: Int): Unit = {this.gems += i}
   def setBoard(someBoard: IBoard): Unit = {this.board = someBoard}
 }
