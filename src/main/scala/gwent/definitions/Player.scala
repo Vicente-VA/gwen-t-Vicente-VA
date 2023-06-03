@@ -7,7 +7,7 @@ package gwent.definitions
 import gwent.definitions.board
 import gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
 import gwent.definitions.card.weatherCard.{IPlayWeather, WeatherCard}
-import gwent.definitions.card.{Card, PlayCard}
+import gwent.definitions.card.Card
 
 import cl.uchile.dcc.gwent.definitions.board.{IBoard,Board,NullBoard}
 
@@ -24,6 +24,14 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
     this.name = "Player"
   }
 
+  /** playCard, juega la carta indicada desde la mano del jugador al tablero asignado al jugador
+   *  Utiliza los metodos implementados por IPlayUnit y IPlayWeather
+   *  Si no se encuentra la carta en la mano, se imprime un mensaje a consola
+   * 
+   * @param card es la carta a jugar, que debe estar en la mano del jugador
+   * @return true si la carta se jugó exitosamente
+   *         false si no fue asi
+   */
   def playCard(card: Card): Boolean ={
     val ind = hand.indexWhere(_.getName == card.getName)
     if(ind == -1){
@@ -34,6 +42,12 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
     }
   }
 
+  /** Juega una carta de tipo CloseCombatCard en el tablero asignado al jugador
+   *
+   * @param card es la carta jugada
+   * @return true si la carta se jugo exitosamente, eliminandola de la mano del jugador
+   *         false si la carta no se pudo jugar, imprimiento en consola "You cannot play this card!"
+   */
   def playCloseCombatCard(card: CloseCombatCard): Boolean = {
     val ind = hand.indexWhere(_.getName == card.getName)
     val didPlayCard: Boolean = this.board.playCloseCombatCard(this, card)
@@ -45,6 +59,13 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
       false
     }
   }
+
+  /** Juega una carta de tipo DistanceCard en el tablero asignado al jugador
+   *
+   * @param card es la carta jugada
+   * @return true si la carta se jugo exitosamente, eliminandola de la mano del jugador
+   *         false si la carta no se pudo jugar, imprimiento en consola "You cannot play this card!"
+   */
   def playDistanceCard(card: DistanceCard): Boolean = {
     val ind = hand.indexWhere(_.getName == card.getName)
     val didPlayCard: Boolean = board.playDistanceCard(this, card)
@@ -57,6 +78,12 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
     }
   }
 
+  /** Juega una carta de tipo SiegeCard en el tablero asignado al jugador
+   *
+   * @param card es la carta jugada
+   * @return true si la carta se jugo exitosamente, eliminandola de la mano del jugador
+   *         false si la carta no se pudo jugar, imprimiento en consola "You cannot play this card!"
+   */
   def playSiegeCard(card: SiegeCard): Boolean = {
     val ind = hand.indexWhere(_.getName == card.getName)
     val didPlayCard: Boolean = this.board.playSiegeCard(this, card)
@@ -68,6 +95,13 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
       false
     }
   }
+
+  /** Juega una carta de tipo WeatherCard en el tablero asignado al jugador
+   *
+   * @param card es la carta jugada
+   * @return true si la carta se jugo exitosamente, eliminandola de la mano del jugador
+   *         false si la carta no se pudo jugar, imprimiento en consola "You cannot play this card!"
+   */
   def playWeatherCard(card: WeatherCard): Boolean = {
     val ind = hand.indexWhere(_.getName == card.getName)
     val didPlayCard: Boolean = this.board.playWeatherCard(card)
@@ -80,10 +114,21 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
     }
   }
 
+  /** shuffleDeck, metodo para revolver el mazo del jugador
+   * 
+   */
   def shuffleDeck(): Unit = {
     deck = scala.util.Random.shuffle(deck)
   }
 
+  /** drawCard, metodo para extraer cartas del mazo a la mano
+   *  Saca la cantidad de cartas indicada.
+   *  - Si el mazo esta vacio, no saca nada e imprime un mensaje a consola
+   *  - Si la cantidad de cartas a sacar es mayor que las que hay en el mazo, saca todas las que quedan
+   *  - Si la cantidad de cartas es negativa, no saca ninguna e imprime un mensaje a la consola
+   * 
+   * @param int es la cantidad de cartas a sacar del mazo
+   */
   def drawCard(int: Int): Unit = {
     if (deck.isEmpty){
       println("Your deck is empty!")
@@ -124,5 +169,11 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
       gems = 0
     }
   }
+
+  /** setBoard, metodo utilizado para asignar un tablero al jugador
+   * 
+   * @param someBoard es el tablero en el que el jugador jugara sus cartas
+   *                  se asigna al inicalizar un tablero Board
+   */
   def setBoard(someBoard: IBoard): Unit = {this.board = someBoard}
 }

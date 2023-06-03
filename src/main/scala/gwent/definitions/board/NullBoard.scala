@@ -6,6 +6,9 @@ import gwent.definitions.card.weatherCard.WeatherCard
 
 import scala.collection.mutable
 
+/** NullBoard, tablero nulo con el que se inicializa un jugador
+ *  Todos los metodos que juegan cartas retornan false para indicarle al jugador que no se pueden jugar cartas
+ */
 class NullBoard extends IBoard {
   var weatherSection: WeatherCard = WeatherCard("", "")
   val playerSections: Map[Player, Section] = Map()
