@@ -13,7 +13,7 @@ import scala.collection.mutable
  * @param P2 Otro de los jugadores, que en un principio sería COM.
  *
  * @constructor Asigna este tablero a P1 y P2. Genera un tablero con una seccion para cada jugador y un espacio para
- *              cartas de clima.
+ *              cartas de clima
  */
 class Board(P1: Player, P2: Player) extends IBoard {
   P1.setBoard(this)
