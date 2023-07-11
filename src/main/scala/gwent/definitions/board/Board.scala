@@ -25,8 +25,8 @@ class Board(P1: Player, P2: Player) extends IBoard {
     P2 -> new Section()
   )
 
-  def playWeatherCard(c: WeatherCard): Boolean = {
-    weatherSection = c
+  def playWeatherCard(card: WeatherCard): Boolean = {
+    weatherSection = card
     true
   }
   def playCloseCombatCard(player: Player, card: CloseCombatCard): Boolean = {
@@ -41,4 +41,11 @@ class Board(P1: Player, P2: Player) extends IBoard {
 
   def getWeatherSection: WeatherCard = this.weatherSection
   def getPlayerSection: Map[Player, Section] = this.playerSections
+
+  /*
+  EL TABLERO DEBE ENCARGARSE DE AVISAR/APLICAR A LAS CARTAS CUANDO UNA CARTA CON EFECTO ENTRE AL CAMPO
+  LAS CARTAS DEBIESEN MODIFICAR SUS PROPIOS ATRIBUTOS
+  OBSERVER ES PARA LA EP6
+  REVISA VISITOR U OTRO APLICABLE
+  */
 }

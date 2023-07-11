@@ -5,6 +5,7 @@ package cl.uchile.dcc
 package gwent.definitions.card
 
 import cl.uchile.dcc.gwent.definitions.Player
+import cl.uchile.dcc.gwent.definitions.card.cardEffects.CardEffect
 
 import scala.collection.mutable
 
@@ -14,6 +15,7 @@ import scala.collection.mutable
 trait Card{
   val name: String
   val description: String
+  val onPlay: CardEffect
 
   /** Play, metodo para jugar la carta
    * 

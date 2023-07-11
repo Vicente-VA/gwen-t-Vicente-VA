@@ -12,18 +12,18 @@ class Section() extends IPlayUnit{
   var distanceField: ArrayBuffer[DistanceCard] = ArrayBuffer()
   var siegeField: ArrayBuffer[SiegeCard] = ArrayBuffer()
 
-  def playCloseCombatCard(c: CloseCombatCard): Boolean = {
-    closeCombatField += c
+  def playCloseCombatCard(card: CloseCombatCard): Boolean = {
+    closeCombatField += card
     true
   }
 
-  def playDistanceCard(c: DistanceCard): Boolean = {
-    distanceField += c
+  def playDistanceCard(card: DistanceCard): Boolean = {
+    distanceField += card
     true
   }
 
-  def playSiegeCard(c: SiegeCard): Boolean = {
-    siegeField += c
+  def playSiegeCard(card: SiegeCard): Boolean = {
+    siegeField += card
     true
   }
 
