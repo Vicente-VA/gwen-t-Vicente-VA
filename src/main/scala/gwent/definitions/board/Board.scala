@@ -2,7 +2,9 @@ package cl.uchile.dcc
 package gwent.definitions.board
 
 import cl.uchile.dcc.gwent.definitions.Player
-import cl.uchile.dcc.gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
+import cl.uchile.dcc.gwent.definitions.card.Card
+import cl.uchile.dcc.gwent.definitions.card.cardEffects.CardEffect
+import cl.uchile.dcc.gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
 import cl.uchile.dcc.gwent.definitions.card.weatherCard.{IPlayWeather, WeatherCard}
 
 import scala.collection.mutable
@@ -30,6 +32,7 @@ class Board(P1: Player, P2: Player) extends IBoard {
     true
   }
   def playCloseCombatCard(player: Player, card: CloseCombatCard): Boolean = {
+    applyEffect(player, card)
     playerSections(player).playCloseCombatCard(card)
   }
   def playDistanceCard(player: Player, card: DistanceCard): Boolean = {
@@ -37,6 +40,23 @@ class Board(P1: Player, P2: Player) extends IBoard {
   }
   def playSiegeCard(player: Player, card: SiegeCard): Boolean = {
     playerSections(player).playSiegeCard(card)
+  }
+
+  // this, next, opposite, other
+  // line, section, closeCombat, distance, siege
+  def applyEffect(player: Player, card: Card): Unit = {
+    card.effect.targetPlayer match {
+      case "self" =>
+        playerSections(player).applyEffect(card)
+      case "other" =>
+        for ((eachPlayer, eachSection) <- playerSections) if (player.notEquals(eachPlayer)) {
+          playerSections(eachPlayer).applyEffect(card)
+        }
+      case "all" =>
+        for ((eachPlayer,eachSection) <- playerSections)
+          playerSections(eachPlayer).applyEffect(card)
+      case _ =>
+    }
   }
 
   def getWeatherSection: WeatherCard = this.weatherSection

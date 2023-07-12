@@ -5,7 +5,7 @@ package cl.uchile.dcc
 package definitions.card
 
 
-import cl.uchile.dcc.gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, SiegeCard}
+import cl.uchile.dcc.gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, SiegeCard}
 import cl.uchile.dcc.gwent.definitions.card.weatherCard.WeatherCard
 import munit.FunSuite
 

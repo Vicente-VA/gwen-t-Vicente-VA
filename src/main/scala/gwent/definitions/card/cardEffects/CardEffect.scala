@@ -3,7 +3,15 @@ package gwent.definitions.card.cardEffects
 
 import gwent.definitions.card.Card
 
+import scala.reflect.ClassTag
+
 trait CardEffect {
-  val compatibleCards: List[]
-  def apply(self: Card, other: Card): Unit
+  val name: String
+  val targetPlayer: String
+  val targetCards: String
+
+  def apply(self: Card, target: Card): Unit
 }
+
+// this, next, opposite, other
+// line, section, closeCombat, distance, siege

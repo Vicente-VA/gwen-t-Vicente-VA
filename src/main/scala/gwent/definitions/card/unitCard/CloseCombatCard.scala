@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package gwent.definitions.card.unit_card
+package gwent.definitions.card.unitCard
 
 import cl.uchile.dcc.gwent.definitions.Player
 

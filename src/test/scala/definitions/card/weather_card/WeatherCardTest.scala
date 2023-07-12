@@ -3,7 +3,7 @@ package definitions.card.weather_card
 
 import cl.uchile.dcc.gwent.definitions.Player
 import cl.uchile.dcc.gwent.definitions.card.Card
-import cl.uchile.dcc.gwent.definitions.card.unit_card.DistanceCard
+import cl.uchile.dcc.gwent.definitions.card.unitCard.DistanceCard
 import cl.uchile.dcc.gwent.definitions.card.weatherCard.WeatherCard
 import munit.FunSuite
 

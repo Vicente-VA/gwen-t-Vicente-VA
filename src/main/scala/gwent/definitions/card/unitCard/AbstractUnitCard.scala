@@ -1,8 +1,10 @@
 package cl.uchile.dcc
-package gwent.definitions.card.unit_card
+package gwent.definitions.card.unitCard
 
 import gwent.definitions.card.Card
+
 import cl.uchile.dcc.gwent.definitions.Player
+import cl.uchile.dcc.gwent.definitions.card.cardEffects.{CardEffect, NullEffect}
 
 
 /** AbstractUnitCard: Clase abstracta para las cartas de unidad
@@ -24,4 +26,6 @@ abstract class AbstractUnitCard protected(val name: String, val description: Str
   def getName: String = {
     this.name
   }
+
+  override val onPlay: CardEffect = new NullEffect()
 }

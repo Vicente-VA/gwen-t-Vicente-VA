@@ -3,7 +3,7 @@ package definitions.card.unit_card
 
 import cl.uchile.dcc.gwent.definitions.Player
 import cl.uchile.dcc.gwent.definitions.card.Card
-import cl.uchile.dcc.gwent.definitions.card.unit_card.SiegeCard
+import cl.uchile.dcc.gwent.definitions.card.unitCard.SiegeCard
 import cl.uchile.dcc.gwent.definitions.card.weatherCard.WeatherCard
 import munit.FunSuite
 

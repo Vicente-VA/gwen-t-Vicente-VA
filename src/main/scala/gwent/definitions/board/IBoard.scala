@@ -4,7 +4,7 @@ package gwent.definitions.board
 import gwent.definitions.card.weatherCard.WeatherCard
 
 import cl.uchile.dcc.gwent.definitions.Player
-import cl.uchile.dcc.gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, SiegeCard}
+import cl.uchile.dcc.gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, SiegeCard}
 
 /** IBoard, interfaz para modelar el tablero y tablero nulo
  *  Implementa los metodos necesarios para el Double Dispatch de las posibles cartas a jugar

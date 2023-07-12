@@ -5,7 +5,8 @@ import gwent.definitions.card.Card
 import gwent.definitions.card.cardEffects.CardEffect
 
 class NullEffect extends CardEffect {
-  override def apply(self: Card, other: Card): Unit = {
-
-  }
+  val name: String = ""
+  val targets: (List[String], List[String]) = (List(), List())
+  
+  def apply(self: Card, target: Card): Unit = {}
 }

@@ -5,7 +5,7 @@ package cl.uchile.dcc
 package gwent.definitions
 
 import gwent.definitions.board
-import gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
+import gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
 import gwent.definitions.card.weatherCard.{IPlayWeather, WeatherCard}
 import gwent.definitions.card.Card
 

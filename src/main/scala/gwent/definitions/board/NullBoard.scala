@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package gwent.definitions.board
 import gwent.definitions.Player
-import gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, SiegeCard}
+import gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, SiegeCard}
 import gwent.definitions.card.weatherCard.WeatherCard
 
 import scala.collection.mutable

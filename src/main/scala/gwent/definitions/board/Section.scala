@@ -2,7 +2,7 @@ package cl.uchile.dcc
 package gwent.definitions.board
 
 import cl.uchile.dcc.gwent.definitions.card.Card
-import cl.uchile.dcc.gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
+import cl.uchile.dcc.gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
 
 import scala.collection.mutable.ArrayBuffer
 

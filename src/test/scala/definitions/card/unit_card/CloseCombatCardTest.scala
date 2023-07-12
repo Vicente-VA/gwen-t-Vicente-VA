@@ -3,7 +3,7 @@ package definitions.card.unit_card
 
 import gwent.definitions.Player
 import gwent.definitions.card.Card
-import gwent.definitions.card.unit_card.{CloseCombatCard, DistanceCard}
+import gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard}
 import gwent.definitions.card.weatherCard.WeatherCard
 
 import munit.FunSuite
