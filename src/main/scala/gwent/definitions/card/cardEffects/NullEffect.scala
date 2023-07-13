@@ -9,4 +9,8 @@ class NullEffect extends CardEffect {
   val targets: (List[String], List[String]) = (List(), List())
   
   def apply(self: Card, target: Card): Unit = {}
+
+  val targetPlayer: String = ""
+  val targetCards: String = ""
+  var applied: Boolean = true
 }

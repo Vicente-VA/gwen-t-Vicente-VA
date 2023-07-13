@@ -27,5 +27,5 @@ abstract class AbstractUnitCard protected(val name: String, val description: Str
     this.name
   }
 
-  override val onPlay: CardEffect = new NullEffect()
+  override val effect: CardEffect = new NullEffect()
 }

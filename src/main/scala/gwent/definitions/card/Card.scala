@@ -15,7 +15,7 @@ import scala.collection.mutable
 trait Card{
   val name: String
   val description: String
-  val onPlay: CardEffect
+  val effect: CardEffect
 
   /** Play, metodo para jugar la carta
    * 
@@ -23,6 +23,7 @@ trait Card{
    * @return la implementacion del jugador para jugar el tipo de carta
    *         true si la carta se jugo correctamente
    *         false si no se pudo jugar la carta
+   *
    */
   def play(player: Player): Boolean
   
