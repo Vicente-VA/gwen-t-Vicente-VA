@@ -9,7 +9,8 @@ import gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, IPlayUnit
 import gwent.definitions.card.weatherCard.{IPlayWeather, WeatherCard}
 import gwent.definitions.card.Card
 
-import cl.uchile.dcc.gwent.definitions.board.{IBoard,Board,NullBoard}
+import cl.uchile.dcc.gwent.definitions.board.{Board, IBoard, NullBoard}
+import cl.uchile.dcc.gwent.definitions.controller.GameController
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
@@ -20,8 +21,18 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
   private var deck: ArrayBuffer[Card] = _deck.map(identity)
   private val hand: ArrayBuffer[Card] = ArrayBuffer()
   private var board: IBoard = NullBoard()
+  private var controller: GameController = new GameController()
   if (this.name.isEmpty) {
     this.name = "Player"
+  }
+
+  def setController(gameController: GameController): Unit = {
+    controller = gameController
+  }
+
+  def notifyDead(): Unit = {
+    if this.gems <= 0:
+      controller.deadPlayer(this)
   }
 
   /** playCard, juega la carta indicada desde la mano del jugador al tablero asignado al jugador
