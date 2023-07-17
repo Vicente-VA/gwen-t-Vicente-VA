@@ -41,20 +41,13 @@ class Board(P1: Player, P2: Player) extends IBoard {
     playerSections(player).playSiegeCard(card)
   }
 
-//  def applyEffect(player: Player, card: Card): Unit = {
-//    card.effect.targetPlayer match {
-//      case "self" =>
-//        playerSections(player).applyEffect(card)
-//      case "opponent" =>
-//        for ((eachPlayer, eachSection) <- playerSections) if (!player.equals(eachPlayer)) {
-//          playerSections(eachPlayer).applyEffect(card)
-//        }
-//      case "all" =>
-//        for ((eachPlayer,eachSection) <- playerSections)
-//          playerSections(eachPlayer).applyEffect(card)
-//      case _ =>
-//    }
-//  }
+  def applyEffect(player: Player, card: Card): Unit = {
+    if (card.effect.targetPlayer == "all"){
+      for ((eachPlayer, eachSection) <- playerSections){
+        eachSection.applyEffect(card)
+      }
+    }
+  }
 
   def getWeatherSection: WeatherCard = this.weatherSection
   def getPlayerSection: Map[Player, Section] = this.playerSections

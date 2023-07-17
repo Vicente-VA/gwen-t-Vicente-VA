@@ -7,9 +7,9 @@ import scala.reflect.ClassTag
 
 /** CardEffect modela los efectos que pueden tener las cartas
  * 
- * - targetPlayer: self, opponent
+ * - targetPlayer: self, opponent, all
  * 
- * - targetCards: line, section, closeCombat, distance, siege
+ * - targetCards: row, section, closeCombat, distance, siege
  */
 trait CardEffect {
   val name: String

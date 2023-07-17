@@ -11,6 +11,7 @@ import gwent.definitions.card.Card
 
 import cl.uchile.dcc.gwent.definitions.board.{Board, IBoard, NullBoard}
 import cl.uchile.dcc.gwent.definitions.controller.GameController
+import cl.uchile.dcc.gwent.definitions.controller.notifications.{ControllerNotification, deadPlayerNotification}
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
@@ -30,9 +31,8 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
     controller = gameController
   }
 
-  def notifyDead(): Unit = {
-    if this.gems <= 0:
-      controller.deadPlayer(this)
+  private def notifyController(alert: ControllerNotification): Unit = {
+    controller.update(alert)
   }
 
   /** playCard, juega la carta indicada desde la mano del jugador al tablero asignado al jugador
@@ -178,6 +178,9 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
     gems = int
     if (gems < 0) {
       gems = 0
+    }
+    if (gems == 0){
+      notifyController(new deadPlayerNotification(this))
     }
   }
 

@@ -11,6 +11,10 @@ class BeginningState(context: GameController) extends GameState(context){
     context.state = new COMState(context)
   }
 
+  override def play(): Unit = {
+
+  }
+
   /*
   genPlayerDeck
   genCOMDeck

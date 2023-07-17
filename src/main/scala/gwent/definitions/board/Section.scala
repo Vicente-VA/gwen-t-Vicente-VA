@@ -3,12 +3,12 @@ package gwent.definitions.board
 
 import cl.uchile.dcc.gwent.definitions.card.Card
 import cl.uchile.dcc.gwent.definitions.card.cardEffects.CardEffect
-import cl.uchile.dcc.gwent.definitions.card.cardEffects.targets.EffectTarget
 import cl.uchile.dcc.gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
 
 import scala.collection.mutable.ArrayBuffer
 
 
+//noinspection DuplicatedCode
 class Section() extends IPlayUnit{
   private var closeCombatField: ArrayBuffer[CloseCombatCard] = ArrayBuffer()
   private var distanceField: ArrayBuffer[DistanceCard] = ArrayBuffer()
@@ -30,7 +30,7 @@ class Section() extends IPlayUnit{
     true
   }
 
-  private def applyEffect(card: Card): Unit = {
+  def applyEffect(card: Card): Unit = {
     card.effect.targetCards match {
       case "section" =>
         for (target <- closeCombatField) card.effect(card, target)
@@ -51,7 +51,7 @@ class Section() extends IPlayUnit{
   }
 
   private def applyCloseCombatEffect(card: CloseCombatCard): Unit = {
-    if (card.effect.targetCards == "line"){
+    if (card.effect.targetCards == "row"){
       for (targetCard <- closeCombatField){
         card.effect(card, targetCard)
       }
@@ -59,7 +59,7 @@ class Section() extends IPlayUnit{
   }
 
   private def applyDistanceEffect(card: DistanceCard): Unit = {
-    if (card.effect.targetCards == "line") {
+    if (card.effect.targetCards == "row") {
       for (targetCard <- distanceField) {
         card.effect(card, targetCard)
       }
@@ -67,7 +67,7 @@ class Section() extends IPlayUnit{
   }
 
   private def applySiegeEffect(card: SiegeCard): Unit = {
-    if (card.effect.targetCards == "line") {
+    if (card.effect.targetCards == "row") {
       for (targetCard <- siegeField) {
         card.effect(card, targetCard)
       }
