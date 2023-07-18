@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package definitions.card.weather_card
+package definitions.card.weatherCard
 
 import cl.uchile.dcc.gwent.definitions.Player
 import cl.uchile.dcc.gwent.definitions.card.Card

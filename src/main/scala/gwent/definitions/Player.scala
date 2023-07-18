@@ -5,8 +5,8 @@ package cl.uchile.dcc
 package gwent.definitions
 
 import gwent.definitions.board
-import gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
-import gwent.definitions.card.weatherCard.{IPlayWeather, WeatherCard}
+import gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, PlayUnit, SiegeCard}
+import gwent.definitions.card.weatherCard.{PlayWeather, WeatherCard}
 import gwent.definitions.card.Card
 
 import cl.uchile.dcc.gwent.definitions.board.{Board, IBoard, NullBoard}
@@ -16,7 +16,7 @@ import cl.uchile.dcc.gwent.definitions.controller.notifications.{ControllerNotif
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) extends IPlayUnit with IPlayWeather {
+class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) extends PlayUnit with PlayWeather {
   private var name = _name
   private var gems: Int = 2
   private var deck: ArrayBuffer[Card] = _deck.map(identity)
@@ -36,7 +36,7 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
   }
 
   /** playCard, juega la carta indicada desde la mano del jugador al tablero asignado al jugador
-   *  Utiliza los metodos implementados por IPlayUnit y IPlayWeather
+   *  Utiliza los metodos implementados por PlayUnit y PlayWeather
    *  Si no se encuentra la carta en la mano, se imprime un mensaje a consola
    * 
    * @param card es la carta a jugar, que debe estar en la mano del jugador
@@ -44,7 +44,7 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
    *         false si no fue asi
    */
   def playCard(card: Card): Boolean ={
-    val ind = hand.indexWhere(_.getName == card.getName)
+    val ind = hand.indexWhere(_.name == card.name)
     if(ind == -1){
       println("There's no such card on your hand!")
       false
@@ -60,7 +60,7 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
    *         false si la carta no se pudo jugar, imprimiento en consola "You cannot play this card!"
    */
   def playCloseCombatCard(card: CloseCombatCard): Boolean = {
-    val ind = hand.indexWhere(_.getName == card.getName)
+    val ind = hand.indexWhere(_.name == card.name)
     val didPlayCard: Boolean = this.board.playCloseCombatCard(this, card)
     if (didPlayCard) {
       hand.remove(ind)
@@ -78,7 +78,7 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
    *         false si la carta no se pudo jugar, imprimiento en consola "You cannot play this card!"
    */
   def playDistanceCard(card: DistanceCard): Boolean = {
-    val ind = hand.indexWhere(_.getName == card.getName)
+    val ind = hand.indexWhere(_.name == card.name)
     val didPlayCard: Boolean = board.playDistanceCard(this, card)
     if (didPlayCard) {
       hand.remove(ind)
@@ -96,7 +96,7 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
    *         false si la carta no se pudo jugar, imprimiento en consola "You cannot play this card!"
    */
   def playSiegeCard(card: SiegeCard): Boolean = {
-    val ind = hand.indexWhere(_.getName == card.getName)
+    val ind = hand.indexWhere(_.name == card.name)
     val didPlayCard: Boolean = this.board.playSiegeCard(this, card)
     if (didPlayCard) {
       hand.remove(ind)
@@ -114,7 +114,7 @@ class Player(private val _name: String, private val _deck: ArrayBuffer[Card]) ex
    *         false si la carta no se pudo jugar, imprimiento en consola "You cannot play this card!"
    */
   def playWeatherCard(card: WeatherCard): Boolean = {
-    val ind = hand.indexWhere(_.getName == card.getName)
+    val ind = hand.indexWhere(_.name == card.name)
     val didPlayCard: Boolean = this.board.playWeatherCard(card)
     if (didPlayCard) {
       hand.remove(ind)

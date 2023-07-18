@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package definitions.card.unit_card
+package definitions.card.unitCard
 
 import cl.uchile.dcc.gwent.definitions.Player
 import cl.uchile.dcc.gwent.definitions.card.Card

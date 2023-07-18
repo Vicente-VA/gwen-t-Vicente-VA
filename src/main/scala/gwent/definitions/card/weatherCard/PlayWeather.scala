@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package gwent.definitions.card.weatherCard
 
-trait IPlayWeather {
+trait PlayWeather {
   /** Juega una carta de tipo WeatherCard por medio de la implementacion de la clase concreta
    *
    * @param card es la carta jugada

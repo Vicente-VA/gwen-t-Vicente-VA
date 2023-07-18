@@ -36,8 +36,8 @@ class CardTest extends FunSuite {
   }
 
   test("La card tiene name") {
-    assert(exSiege.getName == "Alejandro")
-    assert(exWeather.getName == "Sunny")
+    assert(exSiege.name == "Alejandro")
+    assert(exWeather.name == "Sunny")
     assert(exCloseCombat.getName.nonEmpty)
   }
 

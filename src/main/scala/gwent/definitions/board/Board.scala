@@ -3,9 +3,10 @@ package gwent.definitions.board
 
 import cl.uchile.dcc.gwent.definitions.Player
 import cl.uchile.dcc.gwent.definitions.card.Card
-import cl.uchile.dcc.gwent.definitions.card.cardEffects.{CardEffect, NullEffect}
-import cl.uchile.dcc.gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, IPlayUnit, SiegeCard}
-import cl.uchile.dcc.gwent.definitions.card.weatherCard.{IPlayWeather, WeatherCard}
+import cl.uchile.dcc.gwent.definitions.card.cardEffects.unitEffects.UnitCardEffect
+import cl.uchile.dcc.gwent.definitions.card.cardEffects.watherEffects.NullWeatherEffect
+import cl.uchile.dcc.gwent.definitions.card.unitCard.{CloseCombatCard, DistanceCard, PlayUnit, SiegeCard, UnitCard}
+import cl.uchile.dcc.gwent.definitions.card.weatherCard.{PlayWeather, WeatherCard}
 
 import scala.collection.mutable
 
@@ -21,7 +22,7 @@ class Board(P1: Player, P2: Player) extends IBoard {
   P1.setBoard(this)
   P2.setBoard(this)
 
-  private var weatherSection: WeatherCard = WeatherCard("Clear","", new NullEffect)
+  private var weatherSection: WeatherCard = WeatherCard("Clear","")
   private val playerSections: Map[Player,Section] = Map(
     P1 -> new Section(),
     P2 -> new Section()
@@ -29,6 +30,7 @@ class Board(P1: Player, P2: Player) extends IBoard {
 
   def playWeatherCard(card: WeatherCard): Boolean = {
     weatherSection = card
+    applyWeatherEffect(card)
     true
   }
   def playCloseCombatCard(player: Player, card: CloseCombatCard): Boolean = {
@@ -41,11 +43,9 @@ class Board(P1: Player, P2: Player) extends IBoard {
     playerSections(player).playSiegeCard(card)
   }
 
-  def applyEffect(player: Player, card: Card): Unit = {
-    if (card.effect.targetPlayer == "all"){
-      for ((eachPlayer, eachSection) <- playerSections){
-        eachSection.applyEffect(card)
-      }
+  def applyWeatherEffect(card: WeatherCard): Unit = {
+    for ((eachPlayer, eachSection) <- playerSections) {
+      eachSection.applyWeatherEffect(card)
     }
   }
 

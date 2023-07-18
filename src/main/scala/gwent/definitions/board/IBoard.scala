@@ -17,7 +17,7 @@ trait IBoard {
    * @param card   es la carta jugada
    * @return la implementacion de esta funcion en Section
    *
-   * @see documentacion de IPlayUnit
+   * @see documentacion de PlayUnit
    */
   def playCloseCombatCard(player: Player, card: CloseCombatCard): Boolean
 
@@ -26,7 +26,7 @@ trait IBoard {
    * @param player es el jugador que jugó la carta, y clave para el map de playerSections
    * @param card   es la carta jugada
    * @return la implementacion de esta funcion en Section
-   * @see documentacion de IPlayUnit
+   * @see documentacion de PlayUnit
    */
   def playDistanceCard(player: Player, card: DistanceCard): Boolean
 
@@ -35,7 +35,7 @@ trait IBoard {
    * @param player es el jugador que jugó la carta, y clave para el map de playerSections
    * @param card   es la carta jugada
    * @return la implementacion de esta funcion en Section
-   * @see documentacion de IPlayUnit
+   * @see documentacion de PlayUnit
    */
   def playSiegeCard(player: Player, card: SiegeCard): Boolean
 
@@ -49,4 +49,6 @@ trait IBoard {
 
   def getPlayerSection: Map[Player, Section]
   def getWeatherSection: WeatherCard
+  
+  def applyWeatherEffect(card: WeatherCard): Unit
 }
