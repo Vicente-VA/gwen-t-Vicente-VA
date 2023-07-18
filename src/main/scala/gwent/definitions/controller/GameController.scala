@@ -17,6 +17,6 @@ class GameController {
   }
 
   def play(): Unit = {
-    state.play()
+    state.play("real")
   }
 }

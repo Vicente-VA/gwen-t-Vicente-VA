@@ -6,7 +6,7 @@ import gwent.definitions.controller.GameController
 class GameState(val context: GameController){
   context.state = this
 
-  def play(): Unit = {}
+  def play(mode: String): Unit = {}
   
   def toBeginningState(): Unit = {
     transitionError("IdleState")
