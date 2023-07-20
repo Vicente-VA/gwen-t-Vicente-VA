@@ -35,8 +35,8 @@ class ClearWeatherTest extends FunSuite {
   }
 
   test("El efecto funciona con las cartas de CloseCombat") {
-    P1.drawCard(20)
-    P2.drawCard(20)
+    P1.drawCard(25)
+    P2.drawCard(25)
     P1.playCard(new Dwarf)
     assertEquals(board.getPlayerSection(P1).getCloseCombatField(0).getStrength, 3)
     P1.playCard(new Dwarf)
@@ -49,8 +49,8 @@ class ClearWeatherTest extends FunSuite {
   }
 
   test("El efecto funciona con las cartas de Distance") {
-    P1.drawCard(20)
-    P2.drawCard(20)
+    P1.drawCard(25)
+    P2.drawCard(25)
     P1.playCard(new Legolas)
     assertEquals(board.getPlayerSection(P1).getDistanceField(0).getStrength, 3)
     P1.playCard(new Legolas)
@@ -59,8 +59,8 @@ class ClearWeatherTest extends FunSuite {
   }
 
   test("El efecto funciona con las cartas de Siege") {
-    P1.drawCard(20)
-    P2.drawCard(20)
+    P1.drawCard(25)
+    P2.drawCard(25)
     P1.playCard(new Kevin)
     assertEquals(board.getPlayerSection(P1).getSiegeField(0).getStrength, 13)
     P1.playCard(new Kevin)
@@ -69,8 +69,8 @@ class ClearWeatherTest extends FunSuite {
   }
 
   test("El efecto no se aplica a cartas de otras filas") {
-    P1.drawCard(20)
-    P2.drawCard(20)
+    P1.drawCard(25)
+    P2.drawCard(25)
     P1.playCard(new SniperMonke)
     assertEquals(board.getPlayerSection(P1).getDistanceField(0).getStrength, 9)
     P1.playCard(new Bomber)

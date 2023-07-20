@@ -6,6 +6,11 @@ import gwent.definitions.card.unitCard.UnitCard
 
 import cl.uchile.dcc.gwent.definitions.card.weatherCard.WeatherCard
 
+/**
+ * Clear Weather (Clima despeajdo)
+ *
+ * Elimina los efectos climaticos sobre TODAS las cartas
+ */
 class ClearWeather extends WeatherCardEffect {
   override val name: String = "Clear Weather"
 

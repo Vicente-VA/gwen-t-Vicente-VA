@@ -8,12 +8,21 @@ import cl.uchile.dcc.gwent.cardCatalog.unitCards.distance.{Decidueye, Legolas, L
 import cl.uchile.dcc.gwent.cardCatalog.unitCards.siege.{Ballista, Bomber, Kevin}
 import cl.uchile.dcc.gwent.cardCatalog.weatherCards.{Foggy, Rainy, Snowy, Sunny}
 import cl.uchile.dcc.gwent.definitions.Player
+import cl.uchile.dcc.gwent.definitions.board.Board
 import cl.uchile.dcc.gwent.definitions.card.Card
 import cl.uchile.dcc.gwent.definitions.card.cardEffects.watherEffects.ClearWeather
 
 import scala.collection.mutable.ArrayBuffer
+import scala.util.Random
 
+/**
+ * Estado Inicial, en el que comienza el controlador y en el que se decide quien jugara primero
+ * 
+ * @param context es el controlador de juego al que se le asigno este estado
+ */
 class BeginningState(context: GameController) extends GameState(context){
+  val name: String = "Beginning"
+
   override def toPlayerState(): Unit = {
     context.state = new PlayerState(context)
   }
@@ -22,37 +31,27 @@ class BeginningState(context: GameController) extends GameState(context){
   }
 
   override def play(mode: String): Unit = {
-    var name = ""
-    if (mode == "real"){
-      println("Introduzca su nombre \n")
-      name = scala.io.StdIn.readLine()
-    } else name = "Player"
-
-    val premadeDeck1: ArrayBuffer[Card] = ArrayBuffer(
-      new Dwarf, new Dwarf, new Knight, new Knight, new LinkButNowWithSword, new LinkButNowWithSword, new WrenchDude, new WrenchDude,
-      new Legolas, new Legolas, new LinkWithBow, new LinkWithBow, new SniperMonke, new SniperMonke, new Decidueye, new Decidueye,
-      new Ballista, new Bomber, new Bomber, new Kevin, new Kevin,
-      new Snowy, new Rainy, new Foggy, new Sunny
-    )
-
-    val premadeDeck2: ArrayBuffer[Card] = ArrayBuffer(
-      new Dwarf, new Dwarf, new Knight, new Knight, new LinkButNowWithSword, new LinkButNowWithSword, new WrenchDude, new WrenchDude,
-      new Legolas, new Legolas, new LinkWithBow, new LinkWithBow, new SniperMonke, new SniperMonke, new Decidueye, new Decidueye,
-      new Ballista, new Bomber, new Bomber, new Kevin, new Kevin,
-      new Snowy, new Rainy, new Foggy, new Sunny
-    )
-
-    val P1: Player = new Player(name, premadeDeck1)
-    val COM: Player = new Player("COM", premadeDeck2)
-
+    context.initialize(mode)
+    println("Tossing a coin...")
+    Thread.sleep(3000)
+    var coin = -1
+    mode match {
+      case "player test" => coin = 0
+      case "com test" => coin = 1
+      case "real" => coin = Random.nextInt(2)
+      case _ => throw new InvalidPlayMode(this.name, mode)
+    }
+    if (coin == 0){
+      println("Heads! Your turn")
+      toPlayerState()
+    } else {
+      println("Tails! The COM plays")
+      toCOMState()
+    }
+    context.play(mode)
   }
+}
 
-  /*
-  genPlayerDeck
-  genCOMDeck
-  init Player(context.playerName)
-  tossCoin
-  if tossedCoin -> toPlayerState
-  else -> toCOMState
-  */
+class InvalidPlayMode(where: String, used: String) extends Throwable{
+  println(s"Invalid mode called in $where . $used was used")
 }

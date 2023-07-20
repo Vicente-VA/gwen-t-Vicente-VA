@@ -4,7 +4,11 @@ package gwent.definitions.controller.gameStates
 import gwent.definitions.controller.GameController
 
 class EndState(context: GameController) extends GameState(context){
+  val name: String = "End"
+  
   override def toBeginningState(): Unit = {
     context.state = new BeginningState(context)
   }
+
+  override def play(mode: String): Unit = {}
 }

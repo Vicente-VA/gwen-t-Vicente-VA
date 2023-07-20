@@ -6,6 +6,12 @@ import gwent.definitions.card.unitCard.UnitCard
 
 import cl.uchile.dcc.gwent.definitions.card.weatherCard.WeatherCard
 
+
+/**
+ * Biting Frost (Escarcha Mordiente)
+ * 
+ * Reduce el valor de fuerza de todas las cartas de CloseCombat a 1
+ */
 class BitingFrost extends WeatherCardEffect {
   override val name: String = "Biting Frost"
 
