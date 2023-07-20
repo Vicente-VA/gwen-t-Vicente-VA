@@ -12,13 +12,22 @@ import scala.collection.mutable.ArrayBuffer
 
 object main {
   def main(args: Array[String]): Unit = {
-    val premadeDeck: ArrayBuffer[Card] = ArrayBuffer(
-      new Dwarf, new Dwarf, new Knight, new Knight, new LinkButNowWithSword, new LinkButNowWithSword, new WrenchDude, new WrenchDude,
-      new Legolas, new Legolas, new LinkWithBow, new LinkWithBow, new SniperMonke, new SniperMonke, new Decidueye, new Decidueye,
-      new Ballista, new Bomber, new Bomber, new Kevin, new Kevin,
-      new Snowy, new Rainy, new Foggy, new Sunny
-    )
+    class A {
+      def foo(): Unit = {
+        println("Metodo A")
+      }
+    }
 
-    println(premadeDeck.length)
+    class B extends A{
+      override def foo(): Unit = {
+        println("Metodo B")
+      }
+    }
+
+    val a: A = new A()
+    val b: A = new B()
+
+    a.foo()
+    b.foo()
   }
 }

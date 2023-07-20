@@ -16,7 +16,26 @@ class GameController {
     notification.takeAction(this)
   }
 
+  def toBeginningState(): Unit = {
+    state.toBeginningState()
+  }
+
+  def toPlayerState(): Unit = {
+    state.toPlayerState()
+  }
+
+  def toCOMState(): Unit = {
+    state.toCOMState()
+  }
+
+  def toEndState(): Unit = {
+    state.toEndState()
+  }
+
   def play(): Unit = {
     state.play("real")
+  }
+  def playTest(): Unit = {
+    state.play("")
   }
 }

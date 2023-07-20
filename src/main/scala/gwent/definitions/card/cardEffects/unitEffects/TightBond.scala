@@ -9,10 +9,11 @@ class TightBond extends atSelfRow {
 
   def apply(self: UnitCard, target: UnitCard): Unit = {
     if (target.name == self.name){
-      target.setStrength(target.getStrength * 2)
+      target.setBaseStrength(target.getStrength * 2)
+      if (!this.applied) {
+        self.setBaseStrength(self.getStrength * 2)
+      }
     }
-    if (!this.applied){
-      self.setStrength(self.getStrength * 2)
-    }
+
   }
 }

@@ -18,6 +18,7 @@ import cl.uchile.dcc.gwent.definitions.controller.notifications.deadPlayerNotifi
 abstract class AbstractUnitCard protected(val name: String, val description: String,
                                           val strength: Int) extends UnitCard {
   private var currentStrength: Int = this.strength
+  private var baseStrength: Int = this.strength
   if (this.currentStrength < 0) {
     this.currentStrength = 0
   }
@@ -28,16 +29,28 @@ abstract class AbstractUnitCard protected(val name: String, val description: Str
     this.currentStrength
   }
   def getBaseStrength: Int = {
-    this.strength
+    this.baseStrength
   }
   def getName: String = {
     this.name
   }
 
-  override def setStrength(int: Int): Unit ={
-    currentStrength = int
-    if (currentStrength < 0) {
+  def setStrength(int: Int): Unit ={
+    if (int > 0) {
+      currentStrength = int
+    }
+    else {
       currentStrength = 0
+    }
+  }
+
+  def setBaseStrength(int: Int): Unit = {
+    setStrength(int)
+    if (int > 0) {
+      baseStrength = int
+    }
+    else {
+      baseStrength = 0
     }
   }
 }

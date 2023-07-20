@@ -9,19 +9,19 @@ class GameState(val context: GameController){
   def play(mode: String): Unit = {}
   
   def toBeginningState(): Unit = {
-    transitionError("IdleState")
+    transitionError("BeginningState")
   }
 
   def toPlayerState(): Unit = {
-    transitionError("SelectingTargetState")
+    transitionError("PlayerState")
   }
 
   def toCOMState(): Unit = {
-    transitionError("SelectingTargetState")
+    transitionError("COMState")
   }
 
   def toEndState(): Unit = {
-    transitionError("SelectingTargetState")
+    transitionError("EndState")
   }
 
 

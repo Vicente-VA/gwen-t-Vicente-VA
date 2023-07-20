@@ -28,15 +28,22 @@ class BeginningState(context: GameController) extends GameState(context){
       name = scala.io.StdIn.readLine()
     } else name = "Player"
 
-    val premadeDeck: ArrayBuffer[Card] = ArrayBuffer(
+    val premadeDeck1: ArrayBuffer[Card] = ArrayBuffer(
       new Dwarf, new Dwarf, new Knight, new Knight, new LinkButNowWithSword, new LinkButNowWithSword, new WrenchDude, new WrenchDude,
       new Legolas, new Legolas, new LinkWithBow, new LinkWithBow, new SniperMonke, new SniperMonke, new Decidueye, new Decidueye,
       new Ballista, new Bomber, new Bomber, new Kevin, new Kevin,
       new Snowy, new Rainy, new Foggy, new Sunny
     )
 
-    val P1: Player = new Player(name, ArrayBuffer())
-    val COM: Player = new Player("COM", ArrayBuffer())
+    val premadeDeck2: ArrayBuffer[Card] = ArrayBuffer(
+      new Dwarf, new Dwarf, new Knight, new Knight, new LinkButNowWithSword, new LinkButNowWithSword, new WrenchDude, new WrenchDude,
+      new Legolas, new Legolas, new LinkWithBow, new LinkWithBow, new SniperMonke, new SniperMonke, new Decidueye, new Decidueye,
+      new Ballista, new Bomber, new Bomber, new Kevin, new Kevin,
+      new Snowy, new Rainy, new Foggy, new Sunny
+    )
+
+    val P1: Player = new Player(name, premadeDeck1)
+    val COM: Player = new Player("COM", premadeDeck2)
 
   }
 

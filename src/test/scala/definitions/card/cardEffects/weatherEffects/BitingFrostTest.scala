@@ -5,7 +5,7 @@ import gwent.cardCatalog.unitCards.closeCombat.WrenchDude
 import gwent.cardCatalog.unitCards.distance.SniperMonke
 import gwent.cardCatalog.unitCards.siege.Bomber
 import gwent.definitions.Player
-import gwent.definitions.board.{Board, IBoard}
+import gwent.definitions.board.{Board, IBoard, NullBoard}
 import gwent.definitions.card.Card
 
 import cl.uchile.dcc.gwent.cardCatalog.weatherCards.Snowy
@@ -15,18 +15,20 @@ import scala.collection.mutable.ArrayBuffer
 
 
 class BitingFrostTest extends FunSuite {
-  val startingDeck: ArrayBuffer[Card] = ArrayBuffer(new WrenchDude, new SniperMonke, new Bomber,
-    new WrenchDude, new SniperMonke, new Bomber,
-    new WrenchDude, new SniperMonke, new Bomber,
-    new Snowy, new Snowy, new Snowy)
-  var P1: Player = new Player("P1", startingDeck.map(identity))
-  var P2: Player = new Player("P2", startingDeck.map(identity))
-  var board: IBoard = new Board(P1, P2)
+  var P1: Player = new Player("P1", ArrayBuffer())
+  var P2: Player = new Player("P2", ArrayBuffer())
+  var board: IBoard = new NullBoard
 
   override def beforeEach(context: BeforeEach): Unit = {
-    var P1: Player = new Player("P1", startingDeck.map(identity))
-    var P2: Player = new Player("P2", startingDeck.map(identity))
-    var board: IBoard = new Board(P1, P2)
+    P1 = new Player("P1", ArrayBuffer(new WrenchDude, new SniperMonke, new Bomber,
+                                              new WrenchDude, new SniperMonke, new Bomber,
+                                              new WrenchDude, new SniperMonke, new Bomber,
+                                              new Snowy, new Snowy, new Snowy))
+    P2 = new Player("P2", ArrayBuffer(new WrenchDude, new SniperMonke, new Bomber,
+                                              new WrenchDude, new SniperMonke, new Bomber,
+                                              new WrenchDude, new SniperMonke, new Bomber,
+                                              new Snowy, new Snowy, new Snowy))
+    board = new Board(P1, P2)
   }
 
   test("El efecto funciona con las cartas de CloseCombat") {

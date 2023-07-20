@@ -11,4 +11,5 @@ trait UnitCard extends Card{
   def getStrength: Int
   def getBaseStrength: Int
   def setStrength(int: Int): Unit
+  def setBaseStrength(int: Int): Unit
 }
